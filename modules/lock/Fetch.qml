@@ -147,7 +147,6 @@ ColumnLayout {
 
         Logo {
             width: height
-            height: height
         }
     }
 
@@ -163,6 +162,7 @@ ColumnLayout {
     }
 
     component WrappedLoader: Loader {
+        asynchronous: true
         visible: active
     }
 

@@ -136,12 +136,14 @@ StyledRect {
                 radius: Appearance.rounding.full
 
                 Loader {
+                    asynchronous: true
                     anchors.centerIn: parent
                     sourceComponent: root.image ? imageComp : root.appIcon ? appIconComp : materialIconComp
                 }
             }
 
             Loader {
+                asynchronous: true
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 active: root.appIcon && root.image
@@ -202,11 +204,11 @@ StyledRect {
                     radius: Appearance.rounding.full
 
                     StateLayer {
-                        color: root.urgency === NotificationUrgency.Critical ? Colours.palette.m3onError : Colours.palette.m3onSurface
-
                         function onClicked(): void {
                             root.toggleExpand(!root.expanded);
                         }
+
+                        color: root.urgency === NotificationUrgency.Critical ? Colours.palette.m3onError : Colours.palette.m3onSurface
                     }
 
                     RowLayout {

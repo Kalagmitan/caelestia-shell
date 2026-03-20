@@ -40,6 +40,7 @@ Column {
     }
 
     Loader {
+        asynchronous: true
         anchors.horizontalCenter: parent.horizontalCenter
 
         // TODO: Change to use the abstraction (Power in qs.services)
@@ -205,12 +206,12 @@ Column {
         implicitHeight: icon.implicitHeight + Appearance.padding.small * 2
 
         StateLayer {
-            radius: Appearance.rounding.full
-            color: profiles.current === parent.icon ? Colours.palette.m3onPrimary : Colours.palette.m3onSurface
-
             function onClicked(): void {
                 Power.setProfile(parent.profile);
             }
+
+            radius: Appearance.rounding.full
+            color: profiles.current === parent.icon ? Colours.palette.m3onPrimary : Colours.palette.m3onSurface
         }
 
         MaterialIcon {
