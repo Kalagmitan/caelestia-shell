@@ -17,6 +17,9 @@ Column {
     }
 
     StyledText {
+        // Capitalize the first letter of the generic profile string for UI display
+        property string displayProfile: Power.currentProfile.charAt(0).toUpperCase() + Power.currentProfile.slice(1)
+
         function formatSeconds(s: int, fallback: string): string {
             const day = Math.floor(s / 86400);
             const hr = Math.floor(s / 3600) % 60;
@@ -32,9 +35,6 @@ Column {
 
             return comps.join(", ") || fallback;
         }
-
-        // Capitalize the first letter of the generic profile string for UI display
-        property string displayProfile: Power.currentProfile.charAt(0).toUpperCase() + Power.currentProfile.slice(1)
 
         text: UPower.displayDevice.isLaptopBattery ? qsTr("Time %1: %2").arg(UPower.onBattery ? "remaining" : "until charged").arg(UPower.onBattery ? formatSeconds(UPower.displayDevice.timeToEmpty, "Calculating...") : formatSeconds(UPower.displayDevice.timeToFull, "Fully charged!")) : qsTr("Power profile: %1").arg(displayProfile)
     }
@@ -129,18 +129,21 @@ Column {
             states: [
                 State {
                     name: saver.icon
+
                     Fill {
                         item: saver
                     }
                 },
                 State {
                     name: balance.icon
+
                     Fill {
                         item: balance
                     }
                 },
                 State {
                     name: perf.icon
+
                     Fill {
                         item: perf
                     }
