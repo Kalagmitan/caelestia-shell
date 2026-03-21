@@ -40,6 +40,7 @@ Singleton {
             }
         }
     }
+
     // A dedicated process for running TLP commands ---
     Process {
         id: tlpProcess
@@ -53,6 +54,7 @@ Singleton {
                 root.currentProfile = pendingProfile;
         }
     }
+    //
     // --- ABSTRACTION METHODS ---
     function setProfile(targetProfile) {
         switch (activeBackend) {
@@ -79,6 +81,7 @@ Singleton {
             break;
         }
     }
+
     // --- HELPER METHODS ---
     function mapPpdToGeneric(ppdProfile) {
         if (ppdProfile === PowerProfile.PowerSaver)
