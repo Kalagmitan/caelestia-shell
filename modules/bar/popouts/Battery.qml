@@ -18,7 +18,7 @@ Column {
 
     StyledText {
         // Capitalize the first letter of the generic profile string for UI display
-        property string displayProfile: Power.currentProfile.charAt(0).toUpperCase() + Power.currentProfile.slice(1)
+        property string displayProfile: PowerManager.currentProfile.charAt(0).toUpperCase() + PowerManager.currentProfile.slice(1)
 
         function formatSeconds(s: int, fallback: string): string {
             const day = Math.floor(s / 86400);
@@ -43,7 +43,7 @@ Column {
         asynchronous: true
         anchors.horizontalCenter: parent.horizontalCenter
 
-        // TODO: Change to use the abstraction (Power in qs.services)
+        // TODO: Change to use the abstraction (PowerManager in qs.services)
         active: PowerProfiles.degradationReason !== PerformanceDegradationReason.None
 
         height: active ? ((item as Item)?.implicitHeight ?? 0) : 0
@@ -103,7 +103,7 @@ Column {
         id: profiles
 
         property string current: {
-            const p = Power.currentProfile;
+            const p = PowerManager.currentProfile;
             if (p === "saver")
                 return saver.icon;
             if (p === "performance")
@@ -210,7 +210,7 @@ Column {
 
         StateLayer {
             function onClicked(): void {
-                Power.setProfile(parent.profile);
+                PowerManager.setProfile(parent.profile);
             }
 
             radius: Appearance.rounding.full
