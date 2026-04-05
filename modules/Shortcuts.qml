@@ -1,23 +1,28 @@
-import qs.components.misc
-import qs.modules.controlcenter
-import qs.services
-import Caelestia
+import QtQuick
 import Quickshell
 import Quickshell.Io
+import Caelestia
+import qs.components.misc
+import qs.services
+import qs.modules.controlcenter
 
 Scope {
     id: root
 
     property bool launcherInterrupted
-    readonly property bool hasFullscreen: Hypr.focusedWorkspace?.toplevels.values.some(t => t.lastIpcObject.fullscreen === 2) ?? false
+    readonly property bool hasFullscreen: Hypr.focusedWorkspace?.toplevels.values.some(t => t.lastIpcObject.fullscreen > 1) ?? false
 
+    // qmllint disable unresolved-type
     CustomShortcut {
+        // qmllint enable unresolved-type
         name: "controlCenter"
         description: "Open control center"
         onPressed: WindowFactory.create()
     }
 
+    // qmllint disable unresolved-type
     CustomShortcut {
+        // qmllint enable unresolved-type
         name: "showall"
         description: "Toggle launcher, dashboard and osd"
         onPressed: {
@@ -28,7 +33,9 @@ Scope {
         }
     }
 
+    // qmllint disable unresolved-type
     CustomShortcut {
+        // qmllint enable unresolved-type
         name: "dashboard"
         description: "Toggle dashboard"
         onPressed: {
@@ -39,7 +46,9 @@ Scope {
         }
     }
 
+    // qmllint disable unresolved-type
     CustomShortcut {
+        // qmllint enable unresolved-type
         name: "session"
         description: "Toggle session menu"
         onPressed: {
@@ -50,7 +59,9 @@ Scope {
         }
     }
 
+    // qmllint disable unresolved-type
     CustomShortcut {
+        // qmllint enable unresolved-type
         name: "launcher"
         description: "Toggle launcher"
         onPressed: root.launcherInterrupted = false
@@ -63,13 +74,17 @@ Scope {
         }
     }
 
+    // qmllint disable unresolved-type
     CustomShortcut {
+        // qmllint enable unresolved-type
         name: "launcherInterrupt"
         description: "Interrupt launcher keybind"
         onPressed: root.launcherInterrupted = true
     }
 
+    // qmllint disable unresolved-type
     CustomShortcut {
+        // qmllint enable unresolved-type
         name: "sidebar"
         description: "Toggle sidebar"
         onPressed: {
@@ -80,7 +95,9 @@ Scope {
         }
     }
 
+    // qmllint disable unresolved-type
     CustomShortcut {
+        // qmllint enable unresolved-type
         name: "utilities"
         description: "Toggle utilities"
         onPressed: {
@@ -99,7 +116,7 @@ Scope {
                 const visibilities = Visibilities.getForActive();
                 visibilities[drawer] = !visibilities[drawer];
             } else {
-                console.warn(`[IPC] Drawer "${drawer}" does not exist`);
+                console.warn(lc, `Drawer "${drawer}" does not exist`);
             }
         }
 
@@ -137,5 +154,12 @@ Scope {
         }
 
         target: "toaster"
+    }
+
+    LoggingCategory {
+        id: lc
+
+        name: "caelestia.qml.shortcuts"
+        defaultLogLevel: LoggingCategory.Info
     }
 }

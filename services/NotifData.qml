@@ -1,12 +1,12 @@
 pragma ComponentBehavior: Bound
 
+import QtQuick
+import Quickshell
+import Quickshell.Services.Notifications
+import Caelestia
 import qs.services
 import qs.config
 import qs.utils
-import Caelestia
-import Quickshell
-import Quickshell.Services.Notifications
-import QtQuick
 
 QtObject {
     id: notif
@@ -51,7 +51,9 @@ QtObject {
     readonly property LazyLoader dummyImageLoader: LazyLoader {
         active: false
 
+        // qmllint disable uncreatable-type
         PanelWindow {
+            // qmllint enable uncreatable-type
             implicitWidth: Config.notifs.sizes.image
             implicitHeight: Config.notifs.sizes.image
             color: "transparent"
@@ -75,7 +77,8 @@ QtObject {
                     h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
                     const hash = (h2 >>> 0).toString(16).padStart(8, 0) + (h1 >>> 0).toString(16).padStart(8, 0);
 
-                    const cache = Paths.notifimagecache + "/${hash}.png";
+                    Paths; // Screw you qmlls
+                    const cache = `${Paths.notifimagecache}/${hash}.png`;
                     CUtils.saveItem(this, Qt.resolvedUrl(cache), () => {
                         notif.image = cache;
                         notif.dummyImageLoader.active = false;
@@ -216,7 +219,9 @@ QtObject {
         urgency = notification.urgency;
         resident = notification.resident;
         hasActionIcons = notification.hasActionIcons;
+        // qmllint disable unresolved-type
         actions = notification.actions.map(a => ({
+                    // qmllint enable unresolved-type
                     identifier: a.identifier,
                     text: a.text,
                     invoke: () => a.invoke()

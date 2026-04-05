@@ -3,12 +3,20 @@ pragma ComponentBehavior: Bound
 import ".."
 import "../components"
 import "./sections"
-import qs.components
-import qs.components.controls
-import qs.components.containers
-import qs.config
+import "../../launcher/services"
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
+import Quickshell.Widgets
+import Caelestia.Models
+import qs.components
+import qs.components.containers
+import qs.components.controls
+import qs.components.effects
+import qs.components.images
+import qs.services
+import qs.config
+import qs.utils
 
 Item {
     id: root
@@ -128,7 +136,7 @@ Item {
 
                     onStatusChanged: {
                         if (status === Loader.Error) {
-                            console.error("[AppearancePane] Wallpaper loader error!");
+                            console.error(lc, "Wallpaper loader error!");
                         }
                     }
 
@@ -250,5 +258,12 @@ Item {
         }
 
         rightContent: appearanceRightContentComponent
+    }
+
+    LoggingCategory {
+        id: lc
+
+        name: "caelestia.qml.controlcenter.appearance"
+        defaultLogLevel: LoggingCategory.Info
     }
 }
